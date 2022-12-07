@@ -263,8 +263,6 @@ FormShare <- R6Class("FormShare",
                        }
                      ),
                      private = list(
-                       #' @description
-                       #' Internal function. Print a message based on a status
                        print_error = function(status) {
                          if (status == 401)
                          {

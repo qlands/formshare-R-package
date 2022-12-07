@@ -2,7 +2,7 @@
 % Please edit documentation in R/FormShare.R
 \name{FormShare}
 \alias{FormShare}
-\title{R6 Class Representing a connection to FormShare}
+\title{An R6 Class Representing a connection to FormShare}
 \description{
 The main FormShare class.
 }
@@ -75,7 +75,7 @@ Create a new FormShare object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new `FormShare` object.
+A new \code{FormShare} object.
 }
 }
 \if{html}{\out{<hr>}}
