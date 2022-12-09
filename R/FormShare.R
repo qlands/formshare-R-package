@@ -11,7 +11,19 @@
 #   FormShare Analytics plugin (https://github.com/qlands/formshare_analytics_plugin)
 #   FormShare Remote SQL plugin (https://github.com/qlands/formshare_sql_plugin)
 
+if(!require(R6)){
+  install.packages("R6", repos = "http://cran.us.r-project.org")
+}
+if(!require(httr)){
+  install.packages("httr", repos = "http://cran.us.r-project.org")
+}
+if(!require(jsonlite)){
+  install.packages("jsonlite", repos = "http://cran.us.r-project.org")
+}
+
 library(R6)
+library(httr)
+library(jsonlite)
 
 #' An R6 Class Representing a connection to FormShare
 #'
@@ -51,8 +63,6 @@ FormShare <- R6Class("FormShare",
                        #' @param api_secret The API Secret to use.
                        #' @return A new `FormShare` object.
                        initialize = function(server_url = "https://formshare.org", user_id = "", api_key = "", api_secret="") {
-                         library(httr)
-                         library(jsonlite)
                          self$user_id = user_id
                          self$server_url <- server_url
                          self$api_key <- api_key

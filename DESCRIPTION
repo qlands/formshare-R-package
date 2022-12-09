@@ -1,16 +1,27 @@
 Package: FormShare
 Type: Package
-Title: FormShare 2 is an advanced data management platform for Open Data Kit (ODK). This package provides analytics directly from R
+Title: FormShare 2 is an Advanced Data Management Platform for Open Data Kit (ODK). This Package Provides Analytics Directly from R
 Version: 1.0.0
 Author: QLands Technology Consultants
 Maintainer: QLands Technology Consultants <info@qlands.com>
-Description: FormShare 2 is an advanced data management platform for Open Data Kit (ODK).
-    This package provides analytics directly from R. It requires:
-    FormShare: https://github.com/qlands/FormShare >= 2.22.0
-    Analytics plugin: https://github.com/qlands/formshare_analytics_plugin
-    Remote SQL plugin: https://github.com/qlands/formshare_sql_plugin
-License: GPL v3.0
+Description: Provides analytics directly from R. It requires:
+    FormShare: <https://github.com/qlands/FormShare >= 2.22.0> .
+    Analytics plugin: <https://github.com/qlands/formshare_analytics_plugin> .
+    Remote SQL plugin: <https://github.com/qlands/formshare_sql_plugin> .
+URL: https://github.com/qlands/formshare-R-package
+BugReports: https://github.com/qlands/formshare-R-package/issues
+Depends:
+    R (>= 3.0)
+Imports:
+    R6 (>= 1.0.0),
+    httr (>= 1.4.4),
+    jsonlite (>= 1.8.3)
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.2
 Roxygen: list(markdown = TRUE)
+StagedInstall: no
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
