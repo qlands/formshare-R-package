@@ -8,7 +8,7 @@ This class provides access to FormShare to perform analytics and data queries di
 ### Requirements
 
 - [R6](https://cran.r-project.org/web/packages/R6/index.html)
-- [FormShare >= 2.22.0](ttps://github.com/qlands/FormShare)
+- [FormShare >= 2.22.0](https://github.com/qlands/FormShare)
 - [FormShare Analytics plug-in](https://github.com/qlands/formshare_analytics_plugin)
 - [FormShare SQL plug-in](https://github.com/qlands/formshare_sql_plugin)
 
