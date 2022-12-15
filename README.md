@@ -1,48 +1,47 @@
-An R6 Class Representing a connection to FormShare
---------------------------------------------------
+A simple connection between FormShare and R for advanced analytics.
+==================================================
 
-### Description
+## Description
 
-This class provides access to FormShare to perform analytics and data queries directly on data repositories.
+[FormShare](https://formshare.org) is an advanced data management platform for [Open Data Kit (ODK)](https://getodk.org/) . This R Package provides a simple connection object between FormShare and R for advanced analytics.
 
-### Requirements
+## Requirements
 
-- [R6](https://cran.r-project.org/web/packages/R6/index.html)
-- [FormShare >= 2.22.0](https://github.com/qlands/FormShare)
-- [FormShare Analytics plug-in](https://github.com/qlands/formshare_analytics_plugin)
-- [FormShare SQL plug-in](https://github.com/qlands/formshare_sql_plugin)
+- [FormShare](https://github.com/qlands/FormShare) >= 2.22.0
+- [FormShare Analytics Plug-in](https://github.com/qlands/formshare_analytics_plugin)
+- [FormShare Remote SQL Plug-in](https://github.com/qlands/formshare_sql_plugin)
 
-### Details
+## Details
 
-This class encapsulates all functions to execute analytics in FormShare.
+This class encapsulates all functions to execute analytics in FormShare directly from R.
 
 ### Public fields
 
-`user_id`
+**user_id**
 
 The user ID in FormShare.
 
-`api_key`
+**api_key**
 
 The API key used to connect to FormShare.
 
-`api_secret`
+**api_secret**
 
 The API secret used to connect to FormShare
 
-`server_url`
+**server_url**
 
 The FormShare server to connect to
 
-`logged_in`
+**logged_in**
 
 Whether the used has a valid connection
 
-`api_token`
+**api_token**
 
 Token to use in other functions
 
-`token_url`
+**token_url**
 
 FormShare URL to retrieve a valid token
 
@@ -50,38 +49,38 @@ FormShare URL to retrieve a valid token
 
 #### Public methods
 
-*   [`FormShare$new()`](#method-FormShare-new)
-
-*   [`FormShare$get_api_key()`](#method-FormShare-get_api_key)
-
-*   [`FormShare$set_api_key()`](#method-FormShare-set_api_key)
-
-*   [`FormShare$get_api_secret()`](#method-FormShare-get_api_secret)
-
-*   [`FormShare$set_api_secret()`](#method-FormShare-set_api_secret)
-
-*   [`FormShare$get_server_url()`](#method-FormShare-get_server_url)
-
-*   [`FormShare$set_server_url()`](#method-FormShare-set_server_url)
-
-*   [`FormShare$login()`](#method-FormShare-login)
-
-*   [`FormShare$get_repositories()`](#method-FormShare-get_repositories)
-
-*   [`FormShare$get_tables()`](#method-FormShare-get_tables)
-
-*   [`FormShare$get_fields()`](#method-FormShare-get_fields)
-
-*   [`FormShare$execute()`](#method-FormShare-execute)
-
-*   [`FormShare$get_table()`](#method-FormShare-get_table)
-
-*   [`FormShare$clone()`](#method-FormShare-clone)
-
+*   [FormShare$new()](#method-new)
+    
+*   [FormShare$get_api_key()](#method-get_api_key)
+    
+*   [FormShare$set_api_key()](#method-set_api_key)
+    
+*   [FormShare$get_api_secret()](#method-get_api_secret)
+    
+*   [FormShare$set_api_secret()](#method-set_api_secret)
+    
+*   [FormShare$get_server_url()](#method-get_server_url)
+    
+*   [FormShare$set_server_url()](#method-set_server_url)
+    
+*   [FormShare$login()](#method-login)
+    
+*   [FormShare$get_repositories()](#method-get_repositories)
+    
+*   [FormShare$get_tables()](#method-get_tables)
+    
+*   [FormShare$get_fields()](#method-get_fields)
+    
+*   [FormShare$execute()](#method-execute)
+    
+*   [FormShare$get_table()](#method-get_table)
+    
+*   [FormShare$clone()](#method-clone)
+    
 
 * * *
 
-#### Method `new()`
+#### Method new
 
 Create a new FormShare object.
 
@@ -90,127 +89,127 @@ Create a new FormShare object.
 ```R
 my_connection = FormShare$new(
   server_url = "https://formshare.org",
-  user_id = "",
-  api_key = "",
-  api_secret = ""
+  user_id = "your_user",
+  api_key = "your_api_key",
+  api_secret = "your_api_secret"
 )
 ```
 
 ##### Arguments
 
-`server_url`
+**server_url**
 
 Server URL. By default https://formshare.org
 
-`user_id`
+**user_id**
 
 The user ID to use
 
-`api_key`
+**api_key**
 
 The API Key to use.
 
-`api_secret`
+**api_secret**
 
 The API Secret to use.
 
 ##### Returns
 
-A new `FormShare` object.
+A connection object to FormShare.
 
 * * *
 
-#### Method `get_api_key()`
+#### Method get_api_key
 
 Get the current API key.
 
 ##### Usage
 
 ```R
-current_api = my_connection$get_api_key()
+current_api_key = my_connection$get_api_key()
 ```
 
 * * *
 
-#### Method `set_api_key()`
+#### Method set_api_key
 
 Sets the current API key.
 
 ##### Usage
 
 ```R
-my_connection$set_api_key(new_key)
+my_connection$set_api_key("new_api_key")
 ```
 
 ##### Arguments
 
-`new_key`
+**new_key**
 
 New API key
 
 * * *
 
-#### Method `get_api_secret()`
+#### Method get_api_secret
 
 Get the current API secret
 
 ##### Usage
 
 ```R
-current_secret = my_connection$get_api_secret()
+current_api_secret = my_connection$get_api_secret()
 ```
 
 * * *
 
-#### Method `set_api_secret()`
+#### Method set_api_secret
 
 Sets the current API secret.
 
 ##### Usage
 
 ```R
-my_connection$set_api_secret(new_secret)
+my_connection$set_api_secret("new_api_secret")
 ```
 
 ##### Arguments
 
-`new_secret`
+**new_secret**
 
 New API secret
 
 * * *
 
-#### Method `get_server_url()`
+#### Method get_server_url
 
 Get the current server URL
 
 ##### Usage
 
 ```R
-current_server = my_connection$get_server_url()
+current_url = my_connection$get_server_url()
 ```
 
 * * *
 
-#### Method `set_server_url()`
+#### Method set_server_url
 
 Sets the current server URL.
 
 ##### Usage
 
 ```R
-my_connection$set_server_url(new_url)
+my_connection$set_server_url("new_url")
 ```
 
 ##### Arguments
 
-`new_url`
+**new_url**
 
 New server URL
 
 * * *
 
-#### Method `login()`
+#### Method login
 
 Log-in to the FormShare server and stores a API token
 
@@ -226,14 +225,14 @@ True of False if the connection was successful.
 
 * * *
 
-#### Method `get_repositories()`
+#### Method get_repositories
 
 Return the repositories that the user has access to.
 
 ##### Usage
 
 ```R
-my_connection$get_repositories()
+my_repositories = my_connection$get_repositories()
 ```
 
 ##### Returns
@@ -242,19 +241,19 @@ A data frame with repositories that the user has access to.
 
 * * *
 
-#### Method `get_tables()`
+#### Method get_tables
 
 Get the tables in a repository.
 
 ##### Usage
 
 ```R
-tables = my_connection$get_tables(repository)
+my_tables = my_connection$get_tables("repository_id")
 ```
 
 ##### Arguments
 
-`repository`
+**repository**
 
 The repository to use
 
@@ -264,23 +263,23 @@ A data frame with tables inside a repository.
 
 * * *
 
-#### Method `get_fields()`
+#### Method get_fields
 
 Get the fields in a table of a repository.
 
 ##### Usage
 
 ```R
-fields = my_connection$get_fields(repository, table)
+my_fields = my_connection$get_fields("repository_id", "table_name")
 ```
 
 ##### Arguments
 
-`repository`
+**repository**
 
-The repository to use
+The repository ID to use
 
-`table`
+**table**
 
 The table to use
 
@@ -290,49 +289,49 @@ A data frame with fields inside a table.
 
 * * *
 
-#### Method `execute()`
+#### Method execute
 
 Executes an SQL and returns it result.
 
 ##### Usage
 
 ```R
-result = my_connection$execute(repository, sql)
+data = my_connection$execute("repository_id", "SELECT * FROM maintable")
 ```
 
 ##### Arguments
 
-`repository`
+**repository**
 
 The repository to use
 
-`sql`
+**sql**
 
 SQL to execute
 
 ##### Returns
 
-A data frame with the result of the execution.
+A data frame with the result of the execution. Return TRUE if the result is empty or if the execution does not return any data. For example when executing a "CREATE VIEW"
 
 * * *
 
-#### Method `get_table()`
+#### Method get_table
 
 A convenient function to return the contents of a table.
 
 ##### Usage
 
 ```R
-data = my_connection$get_table(repository, table)
+data = my_connection$get_table("repository_id", "maintable")
 ```
 
 ##### Arguments
 
-`repository`
+**repository**
 
 The repository to use
 
-`table`
+**table**
 
 Table to retrieve
 
@@ -342,7 +341,7 @@ A data frame with data of the table
 
 * * *
 
-#### Method `clone()`
+#### Method clone
 
 The objects of this class are cloneable with this method.
 
@@ -354,6 +353,14 @@ clone = my_connection$clone(deep = FALSE)
 
 ##### Arguments
 
-`deep`
+**deep**
 
 Whether to make a deep clone.
+
+## License
+
+[GPL V 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+## Author
+
+[Carlos Quiros](https://orcid.org/0000-0002-9485-9961)

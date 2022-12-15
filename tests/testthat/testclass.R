@@ -1,8 +1,8 @@
 my_connection = FormShare$new(
   server_url = "https://formshare.org",
-  user_id = "",
-  api_key = "",
-  api_secret = ""
+  user_id = "cquiros",
+  api_key = "325c7ae5-ea42-4541-9640-131a10d9395b",
+  api_secret = "098f6bcd4621d373cade4e832627b4f6"
 )
-current_url = my_connection$get_server_url()
-expect_equal( object = current_url, expected ="https://formshare.org")
+logged_in = my_connection$login()
+expect_equal( object = logged_in, expected =FALSE)

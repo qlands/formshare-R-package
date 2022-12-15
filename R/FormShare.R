@@ -11,16 +11,6 @@
 #   FormShare Analytics plugin (https://github.com/qlands/formshare_analytics_plugin)
 #   FormShare Remote SQL plugin (https://github.com/qlands/formshare_sql_plugin)
 
-if(!require(R6)){
-  install.packages("R6", repos = "http://cran.us.r-project.org")
-}
-if(!require(httr)){
-  install.packages("httr", repos = "http://cran.us.r-project.org")
-}
-if(!require(jsonlite)){
-  install.packages("jsonlite", repos = "http://cran.us.r-project.org")
-}
-
 library(R6)
 library(httr)
 library(jsonlite)
@@ -32,6 +22,31 @@ library(jsonlite)
 #'
 #' @details
 #' This class encapsulates all functions to execute analytics in FormShare.
+#' @examplesIf interactive()
+#' # This class requires an API key and secret
+#' # you can get one at https://formshare.org/
+#' #
+#' # Create a new connection to FormShare
+#' my_connection = FormShare$new(server_url = "https://formshare.org",
+#' user_id = "my_user",api_key = "my_api_key",api_secret = "my_api_secret")
+#'
+#' # Log in with your account credentials
+#' my_connection$login()
+#'
+#' # Get the repositories that your account has access to
+#' repositories = my_connection$get_repositories()
+#'
+#' # Get the tables in a repository
+#' tables = my_connection$get_tables("a_repository")
+#'
+#' # Get the fields in a table
+#' fields = my_connection$get_fields("a_repository", "a_table")
+#'
+#' # Execute a SQL
+#' data = my_connection$execute("a_repository", "SELECT * FROM maintable")
+#'
+#' # Get the data from a table
+#' data = my_connection$get_table("a_repository", "a_table")
 FormShare <- R6Class("FormShare",
                      public = list(
                        #' @field user_id The user ID in FormShare.
@@ -63,6 +78,9 @@ FormShare <- R6Class("FormShare",
                        #' @param api_secret The API Secret to use.
                        #' @return A new `FormShare` object.
                        initialize = function(server_url = "https://formshare.org", user_id = "", api_key = "", api_secret="") {
+                         library(httr)
+                         library(jsonlite)
+                         self$logged_in = FALSE
                          self$user_id = user_id
                          self$server_url <- server_url
                          self$api_key <- api_key
@@ -131,8 +149,14 @@ FormShare <- R6Class("FormShare",
                              }
                              else
                              {
-                               private$print_error(status)
-                               return(FALSE)
+                               if (interactive())
+                               {
+                                 private$print_error(status)
+                               }
+                               else
+                               {
+                                 return(FALSE)
+                               }
                              }
                            }
                          }
@@ -155,12 +179,11 @@ FormShare <- R6Class("FormShare",
                            else
                            {
                              private$print_error(status)
-                             return(FALSE)
                            }
                          }
                          else
                          {
-                           print("You are not logged in")
+                           stop("You are not logged in")
                          }
                        },
                        #' @description
@@ -183,12 +206,11 @@ FormShare <- R6Class("FormShare",
                            else
                            {
                              private$print_error(status)
-                             return(FALSE)
                            }
                          }
                          else
                          {
-                           print("You are not logged in")
+                           stop("You are not logged in")
                          }
                        },
                        #' @description
@@ -212,12 +234,11 @@ FormShare <- R6Class("FormShare",
                            else
                            {
                              private$print_error(status)
-                             return(FALSE)
                            }
                          }
                          else
                          {
-                           print("You are not logged in")
+                           stop("You are not logged in")
                          }
                        },
                        #' @description
@@ -250,13 +271,21 @@ FormShare <- R6Class("FormShare",
                            }
                            else
                            {
-                             private$print_error(status)
-                             return(FALSE)
+                             if (status != 400)
+                             {
+                               private$print_error(status)
+                             }
+                             else
+                             {
+                               jsonRespText<-content(resp,as="text", encoding = "UTF-8")
+                               error <- fromJSON(jsonRespText)
+                               stop(error$errors)
+                             }
                            }
                          }
                          else
                          {
-                           print("You are not logged in")
+                           stop("You are not logged in")
                          }
                        },
                        #' @description
@@ -276,20 +305,17 @@ FormShare <- R6Class("FormShare",
                        print_error = function(status) {
                          if (status == 401)
                          {
-                           print("Unauthorized")
-                           return(FALSE)
+                           stop("Unauthorized")
                          }
                          if (status == 404)
                          {
-                           print("URL not found")
-                           return(FALSE)
+                           stop("URL not found")
                          }
                          if (status == 500)
                          {
-                           print("HTTP call returned an error")
-                           return(FALSE)
+                           stop("HTTP call returned an error")
                          }
-                         print("Unknown error")
+                         stop("Unknown error")
                        }
                      )
 )

@@ -9,6 +9,34 @@ The main FormShare class.
 \details{
 This class encapsulates all functions to execute analytics in FormShare.
 }
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# This class requires an API key and secret
+# you can get one at https://formshare.org/
+#
+# Create a new connection to FormShare
+my_connection = FormShare$new(server_url = "https://formshare.org",
+user_id = "my_user",api_key = "my_api_key",api_secret = "my_api_secret")
+
+# Log in with your account credentials
+my_connection$login()
+
+# Get the repositories that your account has access to
+repositories = my_connection$get_repositories()
+
+# Get the tables in a repository
+tables = my_connection$get_tables("a_repository")
+
+# Get the fields in a table
+fields = my_connection$get_fields("a_repository", "a_table")
+
+# Execute a SQL
+data = my_connection$execute("a_repository", "SELECT * FROM maintable")
+
+# Get the data from a table
+data = my_connection$get_table("a_repository", "a_table")
+\dontshow{\}) # examplesIf}
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
