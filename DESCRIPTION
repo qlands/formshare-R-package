@@ -1,7 +1,7 @@
 Package: FormShare
 Type: Package
 Title: A Simple Connection Between the 'FormShare App' and 'R' for Advanced Analytics
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Carlos", "Quiros", , "cquiros@qlands.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9485-9961"))

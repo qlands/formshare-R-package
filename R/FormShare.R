@@ -305,15 +305,15 @@ FormShare <- R6Class("FormShare",
                        print_error = function(status) {
                          if (status == 401)
                          {
-                           stop("Unauthorized")
+                           stop("Unauthorized. You need an API key and an API secret. Get them in your profile.")
                          }
                          if (status == 404)
                          {
-                           stop("URL not found")
+                           stop("URL not found. The FormShare installation that you are connecting to may not have the R Analytics plugin.")
                          }
                          if (status == 500)
                          {
-                           stop("HTTP call returned an error")
+                           stop("HTTP call returned an error. FormShare logged the error and the technical team will check it out.")
                          }
                          stop("Unknown error")
                        }
